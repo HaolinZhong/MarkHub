@@ -16,7 +16,7 @@
         </jdbcConnection>
 
         <!--domain pojo location-->
-        <javaModelGenerator targetPackage="hz.blog.markerhub.domain"
+        <javaModelGenerator targetPackage="hz.blog.markhub.domain"
                             targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -28,7 +28,7 @@
         </sqlMapGenerator>
         <!-- mapper interface location -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="hz.blog.markerhub.mapper" targetProject=".\src\main\java">
+                             targetPackage="hz.blog.markhub.mapper" targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

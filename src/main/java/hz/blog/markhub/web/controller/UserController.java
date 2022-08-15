@@ -1,8 +1,8 @@
-package hz.blog.markerhub.web.controller;
+package hz.blog.markhub.web.controller;
 
-import hz.blog.markerhub.domain.UserDo;
-import hz.blog.markerhub.mapper.UserDoMapper;
-import hz.blog.markerhub.web.model.CommonReturnType;
+import hz.blog.markhub.domain.UserDo;
+import hz.blog.markhub.mapper.UserDoMapper;
+import hz.blog.markhub.web.model.CommonReturnType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

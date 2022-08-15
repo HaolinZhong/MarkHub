@@ -1,6 +1,6 @@
-package hz.blog.markerhub.mapper;
+package hz.blog.markhub.mapper;
 
-import hz.blog.markerhub.domain.UserDo;
+import hz.blog.markhub.domain.UserDo;
 
 public interface UserDoMapper {
     /**

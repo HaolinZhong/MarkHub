@@ -1,4 +1,4 @@
-package hz.blog.markerhub.web.model;
+package hz.blog.markhub.web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

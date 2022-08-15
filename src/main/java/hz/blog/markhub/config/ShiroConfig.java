@@ -1,10 +1,10 @@
-package hz.blog.markerhub.config;
+package hz.blog.markhub.config;
 
-import hz.blog.markerhub.shiro.AccountRealm;
-import org.apache.shiro.authc.Account;
+import hz.blog.markhub.shiro.AccountRealm;
+import hz.blog.markhub.shiro.JwtFilter;
+import lombok.RequiredArgsConstructor;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.mgt.SessionsSecurityManager;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
@@ -19,11 +19,13 @@ import org.springframework.context.annotation.Configuration;
 import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @Configuration
 public class ShiroConfig {
+
+    private final JwtFilter jwtFilter;
 
     @Bean
     public SessionManager sessionManager(RedisSessionDAO redisSessionDAO) {
@@ -54,8 +56,8 @@ public class ShiroConfig {
         Map<String, String> filterMap = new LinkedHashMap<>();
 
         // meaning: all routes should be filtered by authentication
-        // todo: replace provided authc filter with custom JWT filter
-        filterMap.put("/**", "authc");
+        // replace provided authc filter with custom JWT filter
+        filterMap.put("/**", "jwt");
         chainDefinition.addPathDefinitions(filterMap);
 
         return chainDefinition;
@@ -70,9 +72,14 @@ public class ShiroConfig {
         // set securityManager
         factoryBean.setSecurityManager(securityManager);
 
+        Map<String, Filter> filterMap = new HashMap<>();
+        filterMap.put("jwt", jwtFilter);
+        factoryBean.setFilters(filterMap);
+
+
         // set filter chain definition map
-        Map<String, String> filterMap = shiroFilterChainDefinition.getFilterChainMap();
-        factoryBean.setFilterChainDefinitionMap(filterMap);
+        Map<String, String> filterChainMap = shiroFilterChainDefinition.getFilterChainMap();
+        factoryBean.setFilterChainDefinitionMap(filterChainMap);
         return factoryBean;
     }
 

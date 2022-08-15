@@ -1,4 +1,4 @@
-package hz.blog.markerhub.exception;
+package hz.blog.markhub.exception;
 
 public class ServiceException extends Exception implements CommonError {
     private CommonError commonError;

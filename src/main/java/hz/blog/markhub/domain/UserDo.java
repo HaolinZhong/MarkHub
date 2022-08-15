@@ -1,4 +1,4 @@
-package hz.blog.markerhub.domain;
+package hz.blog.markhub.domain;
 
 import java.util.Date;
 

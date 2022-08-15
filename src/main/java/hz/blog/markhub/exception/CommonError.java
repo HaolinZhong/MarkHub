@@ -1,4 +1,4 @@
-package hz.blog.markerhub.exception;
+package hz.blog.markhub.exception;
 
 public interface CommonError {
     int getErrCode();

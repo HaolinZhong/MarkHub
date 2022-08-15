@@ -1,10 +1,10 @@
-package hz.blog.markerhub;
+package hz.blog.markhub;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MarkerhubApplicationTests {
+class MarkhubApplicationTests {
 
     @Test
     void contextLoads() {
