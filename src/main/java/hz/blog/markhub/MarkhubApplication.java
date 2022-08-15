@@ -1,15 +1,15 @@
-package hz.blog.markerhub;
+package hz.blog.markhub;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("hz.blog.markerhub.mapper")
-public class MarkerhubApplication {
+@MapperScan("hz.blog.markhub.mapper")
+public class MarkhubApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MarkerhubApplication.class, args);
+        SpringApplication.run(MarkhubApplication.class, args);
     }
 
 }
