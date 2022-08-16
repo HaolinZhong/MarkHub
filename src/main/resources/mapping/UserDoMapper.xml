@@ -35,6 +35,14 @@
     from m_user
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from m_user
+    where name = #{name, jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--
       WARNING - @mbg.generated

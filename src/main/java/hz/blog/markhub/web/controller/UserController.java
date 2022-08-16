@@ -33,7 +33,7 @@ public class UserController {
 
     @PostMapping(value = "/create")
     @ResponseBody
-    public CommonReturnType createUser(@Validated @RequestBody UserVo userVo) {
-        return CommonReturnType.builder().status("success").data(userVo).build();
+    public CommonReturnType createUser(@Validated @RequestBody UserDo userDo) {
+        return CommonReturnType.builder().status("success").data(userConverter.userDoToVo(userDo)).build();
     }
 }

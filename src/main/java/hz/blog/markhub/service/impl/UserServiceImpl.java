@@ -19,4 +19,10 @@ public class UserServiceImpl implements UserService {
 
         return userDo;
     }
+
+    @Override
+    public UserDo getUserByName(String name) {
+        UserDo userDo = userDoMapper.selectByUserName(name);
+        return userDo;
+    }
 }
