@@ -1,5 +1,8 @@
 package hz.blog.markhub.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class BlogDo {
@@ -28,6 +31,7 @@ public class BlogDo {
      *
      * @mbg.generated Sun Aug 14 01:04:22 EDT 2022
      */
+    @NotBlank(message = "Title cannot be blank")
     private String title;
 
     /**
@@ -37,6 +41,7 @@ public class BlogDo {
      *
      * @mbg.generated Sun Aug 14 01:04:22 EDT 2022
      */
+    @NotBlank(message = "Abstract cannot be blank")
     private String description;
 
     /**
@@ -46,6 +51,7 @@ public class BlogDo {
      *
      * @mbg.generated Sun Aug 14 01:04:22 EDT 2022
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
 
     /**
@@ -64,6 +70,7 @@ public class BlogDo {
      *
      * @mbg.generated Sun Aug 14 01:04:22 EDT 2022
      */
+    @NotBlank(message = "Content cannot be blank")
     private String content;
 
     /**
