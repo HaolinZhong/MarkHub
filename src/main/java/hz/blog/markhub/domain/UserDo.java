@@ -1,5 +1,6 @@
 package hz.blog.markhub.domain;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class UserDo {
@@ -19,6 +20,7 @@ public class UserDo {
      *
      * @mbg.generated Sun Aug 14 01:04:22 EDT 2022
      */
+
     private String name;
 
     /**

@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 
 @AllArgsConstructor
@@ -12,12 +15,15 @@ import java.io.Serializable;
 @Data
 @Builder
 public class UserVo implements Serializable {
-
+    @Null(message = "User id should be null")
     private Long id;
 
+    @NotBlank(message = "Username cannot be null or blank")
     private String username;
 
     private String avatar;
 
+    @NotBlank(message = "Email cannot be null or blank")
+    @Email(message = "Invalid email format")
     private String email;
 }

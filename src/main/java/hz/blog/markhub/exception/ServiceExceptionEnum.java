@@ -9,7 +9,8 @@ public enum ServiceExceptionEnum implements CommonError{
 
     // login related
     AUTHENTICATION_FAILED(20000, "Authentication Failed."),
-    CREDENTIALS_EXPIRED(20001, "Token has already expired. Please login again")
+    INVALID_PARAMETER(20001, "Input parameters are invalid."),
+    CREDENTIALS_EXPIRED(20002, "Token has already expired. Please login again")
     ;
 
     private int errCode;
