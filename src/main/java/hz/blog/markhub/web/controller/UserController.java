@@ -4,6 +4,7 @@ import hz.blog.markhub.domain.UserDo;
 import hz.blog.markhub.mapper.UserDoMapper;
 import hz.blog.markhub.web.model.CommonReturnType;
 import lombok.RequiredArgsConstructor;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -14,6 +15,7 @@ public class UserController {
     private final UserDoMapper userDoMapper;
 
     @GetMapping("/get")
+    @RequiresAuthentication
     @ResponseBody
     public CommonReturnType getUserById(@RequestParam("id") Long userId) {
         UserDo userDo = userDoMapper.selectByPrimaryKey(userId);

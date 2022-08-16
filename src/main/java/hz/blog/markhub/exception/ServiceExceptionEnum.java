@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum ServiceExceptionEnum implements CommonError{
+    // unknown error
+    UNKNOWN_ERROR(10000, "Service failed due to internal error"),
+
     // login related
-    CREDENTIALS_EXPIRED(10000, "Token has already expired. Please login again")
+    AUTHENTICATION_FAILED(20000, "Authentication Failed."),
+    CREDENTIALS_EXPIRED(20001, "Token has already expired. Please login again")
     ;
 
     private int errCode;
