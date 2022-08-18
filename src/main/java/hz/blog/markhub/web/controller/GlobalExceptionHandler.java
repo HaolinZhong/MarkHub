@@ -23,30 +23,44 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public CommonReturnType AllExceptionHandler(Exception e) {
-
+    public CommonReturnType GeneralExceptionHandler(Exception e) {
         Map<String, Object> responseData = new HashMap<>();
+        responseData.put("errCode", ServiceExceptionEnum.UNKNOWN_ERROR.getErrCode());
+        responseData.put("errMsg", ServiceExceptionEnum.UNKNOWN_ERROR.getErrMsg());
+        return CommonReturnType.builder().status("fail").data(responseData).build();
+    }
 
-        if (e instanceof ServiceException) {
-            ServiceException se = (ServiceException) e;
-            responseData.put("errCode", se.getErrCode());
-            responseData.put("errMsg", se.getErrMsg());
-        } else if (e instanceof ShiroException) {
-            responseData.put("errCode", ServiceExceptionEnum.AUTHENTICATION_FAILED.getErrCode());
-            responseData.put("errMsg", ServiceExceptionEnum.AUTHENTICATION_FAILED.getErrMsg());
-        } else if (e instanceof MethodArgumentNotValidException) {
-            MethodArgumentNotValidException ae = (MethodArgumentNotValidException) e;
-            List<String> errMsgs = ae.getBindingResult().getAllErrors().stream()
-                    .map(objectError -> objectError.getDefaultMessage())
-                    .collect(Collectors.toList());
+    @ExceptionHandler(ServiceException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public CommonReturnType ServiceExceptionHandler(ServiceException se) {
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("errCode", se.getErrCode());
+        responseData.put("errMsg", se.getErrMsg());
+        return CommonReturnType.builder().status("fail").data(responseData).build();
+    }
 
-            responseData.put("errCode", ServiceExceptionEnum.INVALID_PARAMETER.getErrCode());
-            responseData.put("errMsg", StringUtils.joinWith(", ", errMsgs));
-        } else {
-            responseData.put("errCode", ServiceExceptionEnum.UNKNOWN_ERROR.getErrCode());
-            responseData.put("errMsg", ServiceExceptionEnum.UNKNOWN_ERROR.getErrMsg());
-        }
+    @ExceptionHandler(ShiroException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public CommonReturnType ShiroExceptionHandler(ShiroException e) {
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("errCode", ServiceExceptionEnum.AUTHENTICATION_FAILED.getErrCode());
+        responseData.put("errMsg", ServiceExceptionEnum.AUTHENTICATION_FAILED.getErrMsg());
+        return CommonReturnType.builder().status("fail").data(responseData).build();
+    }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public CommonReturnType ValidationExceptionHandler(MethodArgumentNotValidException ae) {
+        Map<String, Object> responseData = new HashMap<>();
+        List<String> errMsgs = ae.getBindingResult().getAllErrors().stream()
+                .map(objectError -> objectError.getDefaultMessage())
+                .collect(Collectors.toList());
+
+        responseData.put("errCode", ServiceExceptionEnum.INVALID_PARAMETER.getErrCode());
+        responseData.put("errMsg", StringUtils.joinWith(", ", errMsgs));
         return CommonReturnType.builder().status("fail").data(responseData).build();
     }
 }
