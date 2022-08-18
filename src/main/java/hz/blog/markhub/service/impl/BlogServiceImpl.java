@@ -20,12 +20,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Pager<BlogDo> listBlogByPager(Integer currentPage, Integer pageSize) {
 
-        Map<String, Object> params = new HashMap<>();
-
-        params.put("currentPage", (currentPage - 1) * pageSize);
-        params.put("size", pageSize);
-
-        List<BlogDo> blogDos = blogDoMapper.selectByPager(params);
+        List<BlogDo> blogDos = blogDoMapper.selectByPager((currentPage - 1) * pageSize, pageSize);
         Long total = blogDoMapper.count();
 
         Pager<BlogDo> pager = new Pager<>();

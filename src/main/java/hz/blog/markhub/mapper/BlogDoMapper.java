@@ -1,6 +1,7 @@
 package hz.blog.markhub.mapper;
 
 import hz.blog.markhub.domain.BlogDo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,7 @@ public interface BlogDoMapper {
      */
     int updateByPrimaryKey(BlogDo row);
 
-    List<BlogDo> selectByPager(Map<String, Object> params);
+    List<BlogDo> selectByPager(@Param("prev") Integer prev, @Param("pageSize") Integer pageSize);
 
     Long count();
 }

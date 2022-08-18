@@ -39,18 +39,18 @@
     content
   </sql>
 
-  <select id="selectByPager" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPager" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from m_blog
     order by created_at desc
-    limit #{currentPage}, #{pageSize}
+    limit #{prev, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
   </select>
 
 
-  <select id="count" resultMap="java.lang.Long">
+  <select id="count" resultType="java.lang.Long">
     select count(1)
     from m_blog
   </select>
