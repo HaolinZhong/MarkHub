@@ -55,6 +55,7 @@ export default {
             // set jwt & userInfo in store
             this.$store.commit("SET_TOKEN", jwt);
             this.$store.commit("SET_USERINFO", userInfo);
+            this.$router.push("/blogs");
           })
         } else {
           console.log('login failed');

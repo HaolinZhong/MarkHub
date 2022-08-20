@@ -41,7 +41,7 @@ public class AuthenticationController {
 
         String jwt = jwtUtils.generateToken(userDo.getId());
 
-        response.setHeader("Authorization", "jwt");
+        response.setHeader("Authorization", jwt);
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
 
         return CommonReturnType.builder().status("success").data(userConverter.userDoToVo(userDo)).build();

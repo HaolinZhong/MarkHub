@@ -32,12 +32,7 @@ axios.interceptors.response.use(response=>{
       error.message = error.response.data.msg
       console.log(error.message)
     }
-    if(error.response.status == 401){
-      store.commit('REMOVE_INFO')
-      router.push("/login")
-    }
     Element.Message.error(error.message)
-
     return Promise.reject(error)
   }
 
