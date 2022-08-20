@@ -19,7 +19,7 @@ public class UserVo implements Serializable {
     private Long id;
 
     @NotBlank(message = "Username cannot be null or blank")
-    private String username;
+    private String name;
 
     private String avatar;
 

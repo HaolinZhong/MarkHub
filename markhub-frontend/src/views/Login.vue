@@ -48,8 +48,16 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert('submit!');
+          this.$axios.post("http://localhost:8081/login", this.ruleForm).then(res => {
+            console.log(res)
+            const jwt = res.headers['authorization'];
+            const userInfo = res.data.data
+            // set jwt & userInfo in store
+            this.$store.commit("SET_TOKEN", jwt);
+            this.$store.commit("SET_USERINFO", userInfo);
+          })
         } else {
-          console.log('error submit!!');
+          console.log('login failed');
           return false;
         }
       });
