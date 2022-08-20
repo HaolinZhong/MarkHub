@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Demo from '@/views/Demo'
+import Login from "../views/Login";
+import Blogs from "../views/Blogs";
+import BlogEdit from "../views/BlogEdit";
+import BlogDetail from "../views/BlogDetail";
 
 Vue.use(Router)
 
@@ -9,13 +11,33 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Index',
+      redirect: {name: "Login"}
     },
     {
-      path: '/demo',
-      name: 'Demo',
-      component: Demo
-    }
+      path: '/blogs',
+      name: 'Blogs',
+      component: Blogs
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/blog/add',
+      name: 'BlogEdit',
+      component: BlogEdit
+    },
+    {
+      path: '/blog/:blogId',
+      name: 'BlogDetail',
+      component: BlogDetail
+    },
+    {
+      path: '/blog/:blogId/edit',
+      name: 'BlogEdit',
+      component: BlogEdit
+    },
   ]
 })
