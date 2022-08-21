@@ -8,11 +8,11 @@
       <div>{{user.name}}</div>
       <div class="maction">
         <span>
-          <el-link>Homepage</el-link>
+          <el-link href="/blogs">Homepage</el-link>
         </span>
         <el-divider direction="vertical"></el-divider>
         <span>
-          <el-link type="success">New Blog</el-link>
+          <el-link type="success" href="/blog/add">New Blog</el-link>
         </span>
 
         <el-divider direction="vertical"></el-divider>

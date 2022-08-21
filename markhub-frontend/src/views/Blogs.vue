@@ -73,6 +73,7 @@ export default {
 
 .blog-title {
   font-family: 'Lato', sans-serif;
+  text-decoration: none;
 }
 
 .el-card {

@@ -14,7 +14,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')">Login</el-button>
-            <el-button @click="resetForm('ruleForm')">Reset</el-button>
+            <el-button @click="register">Register</el-button>
           </el-form-item>
         </el-form>
       </el-main>
