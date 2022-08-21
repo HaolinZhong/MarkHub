@@ -38,14 +38,14 @@ export default {
     return {
       blogs: {},
       currentPage: 1,
-      total: 1,
+      total: 0,
       pageSize: 5
     }
   },
   methods: {
     page (currentPage) {
       const _this = this
-      _this.$axios.get("/blogs/list?page=" + currentPage).then(res => {
+      _this.$axios.get("/blog/list?page=" + currentPage).then(res => {
         const data = res.data.data
         _this.blogs = data.rows
         _this.currentPage = data.currentPage
@@ -63,7 +63,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
 .block {
-  margin: 20px;
+  margin: 20px 300px;
 }
 
 .mage {

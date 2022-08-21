@@ -70,12 +70,13 @@ export default {
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
 
 .m-content {
   max-width: 960px;
   margin: 0 auto;
   text-align: center;
-  font-family: 'Raleway Medium';
+  font-family: 'Lato', sans-serif;
 }
 .maction {
 }

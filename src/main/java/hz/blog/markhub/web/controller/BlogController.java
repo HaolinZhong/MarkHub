@@ -17,7 +17,7 @@ import java.util.Date;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/blogs")
+@RequestMapping("/blog")
 public class BlogController {
 
     private final static Integer PAGE_SIZE = 5;

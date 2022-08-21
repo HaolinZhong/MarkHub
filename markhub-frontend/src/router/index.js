@@ -10,11 +10,11 @@ Vue.use(Router)
 export default new Router({
   mode: "history",
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'Index',
-    //   redirect: {name: "Blogs"}
-    // },
+    {
+      path: '/',
+      name: 'Index',
+      redirect: {name: "Blogs"}
+    },
     {
       path: '/blogs',
       name: 'Blogs',

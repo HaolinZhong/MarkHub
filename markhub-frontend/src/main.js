@@ -8,10 +8,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import "./config/axios"
 import store from './store'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.prototype.$axios = axios
-
 Vue.use(Element)
+Vue.use(mavonEditor)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
