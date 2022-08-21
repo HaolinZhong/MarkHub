@@ -10,6 +10,7 @@ import "./config/axios"
 import store from './store'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import './permission.js'
 
 Vue.prototype.$axios = axios
 Vue.use(Element)

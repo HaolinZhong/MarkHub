@@ -21,7 +21,7 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">Create Blog</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')" v-text="isNew? 'Create':'Edit'"></el-button>
           <el-button @click="resetForm('ruleForm')">Reset</el-button>
         </el-form-item>
       </el-form>
@@ -38,9 +38,11 @@ export default {
   components: {Header},
   data() {
     return {
+      isNew: !this.$route.params.blogId,
       ruleForm: {
         id: '',
         title: '',
+        userId: '',
         description: '',
         content: ''
       },
@@ -63,19 +65,39 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const _this = this
-          this.$axios.post('/blog/create', this.ruleForm, {
-            headers: {
-              "Authorization": localStorage.getItem("token")
-            }
-          }).then(res => {
-            _this.$alert('Blog Created!', 'Result', {
-              confirmButtonText: 'OK',
-              callback: action => {
-                _this.$router.push("/blogs")
+
+          if (this.isNew) {
+            this.$axios.post('/blog/create', this.ruleForm, {
+              headers: {
+                "Authorization": localStorage.getItem("token")
               }
-            });
-          })
+            }).then(res => {
+              this.$alert('Blog Created!', 'Result', {
+                confirmButtonText: 'OK',
+                callback: action => {
+                  this.$router.push("/blogs")
+                }
+              });
+            })
+          } else {
+            this.$axios.post('/blog/edit', this.ruleForm, {
+              headers: {
+                "Authorization": localStorage.getItem("token")
+              }
+            }).then(res => {
+              this.$alert('Blog Edited!', 'Result', {
+                confirmButtonText: 'OK',
+                callback: action => {
+                  this.$router.push("/blogs")
+                }
+              });
+            })
+          }
+
+
+
+
+
         } else {
           console.log('Failed to create the blog');
           return false;
@@ -88,15 +110,14 @@ export default {
   },
   created() {
     const blogId = this.$route.params.blogId
-    const _this = this
     if (blogId) {
       this.$axios.get("/blog/get/" + blogId).then(res => {
-        console.log(res)
         const blog = res.data.data
-        _this.ruleForm.id = blog.id
-        _this.ruleForm.title = blog.title
-        _this.ruleForm.description = blog.description
-        _this.ruleForm.content = blog.content
+        this.ruleForm.id = blog.id
+        this.ruleForm.userId=blog.userId
+        this.ruleForm.title = blog.title
+        this.ruleForm.description = blog.description
+        this.ruleForm.content = blog.content
       })
     }
   },

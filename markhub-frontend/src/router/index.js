@@ -27,8 +27,11 @@ export default new Router({
     },
     {
       path: '/blog/add',
-      name: 'BlogEdit',
-      component: BlogEdit
+      name: 'BlogAdd',
+      component: BlogEdit,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/blog/:blogId',
@@ -38,7 +41,10 @@ export default new Router({
     {
       path: '/blog/:blogId/edit',
       name: 'BlogEdit',
-      component: BlogEdit
+      component: BlogEdit,
+      meta: {
+        requireAuth: true
+      }
     },
   ]
 })
