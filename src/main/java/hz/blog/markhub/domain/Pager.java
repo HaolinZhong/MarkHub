@@ -11,5 +11,5 @@ public class Pager<T> {
     private Integer currentPage;
     private Integer pageSize;
     private List<T> rows;
-    private Long total;
+    private Integer total;
 }

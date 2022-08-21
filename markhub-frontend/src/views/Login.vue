@@ -10,7 +10,7 @@
             <el-input v-model="ruleForm.username"></el-input>
           </el-form-item>
           <el-form-item label="Password" prop="password">
-            <el-input v-model="ruleForm.password"></el-input>
+            <el-input v-model="ruleForm.password" show-password></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')">Login</el-button>
@@ -73,8 +73,8 @@ export default {
 
 
 <style scoped>
-.el-header,
-.el-footer {
+
+.el-header {
   background-color: #b3c0d1;
   color: #333;
   text-align: center;

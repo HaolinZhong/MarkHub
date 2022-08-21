@@ -21,7 +21,7 @@ public class BlogServiceImpl implements BlogService {
     public Pager<BlogDo> listBlogByPager(Integer currentPage, Integer pageSize) {
 
         List<BlogDo> blogDos = blogDoMapper.selectByPager((currentPage - 1) * pageSize, pageSize);
-        Long total = blogDoMapper.count();
+        Integer total = blogDoMapper.count();
 
         Pager<BlogDo> pager = new Pager<>();
         pager.setCurrentPage(currentPage);
