@@ -31,6 +31,7 @@
             </goals>
             <configuration>
               <nodeVersion>v15.8.0</nodeVersion>
+              <npmVersion>8.18.0</npmVersion>
             </configuration>
           </execution>
           <!-- Install all project dependencies -->
