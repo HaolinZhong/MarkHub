@@ -16,4 +16,6 @@ public interface BlogService {
     Boolean updateBlog(BlogDo blogDo);
 
     Boolean deleteBlog(Long blogId) throws ServiceException;
+
+    Pager<BlogDo> findBlogByPager(Integer page, Integer pageSize, String title);
 }

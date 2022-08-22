@@ -89,4 +89,13 @@ public class BlogController {
         blogService.deleteBlog(blogId);
         return CommonReturnType.builder().status("success").data("Successfully Deleted!").build();
     }
+
+    @GetMapping("findByTitle")
+    @ResponseBody
+    public CommonReturnType findByTitle(@RequestParam("title") String title,
+                                        @RequestParam(value = "page", defaultValue = "1") Integer page) throws ServiceException {
+        Pager<BlogDo> pagedBlogs = blogService.findBlogByPager(page, PAGE_SIZE, "%" + title + "%");
+        if (pagedBlogs.getRows().size() == 0) throw new ServiceException(ServiceExceptionEnum.ITEM_NOT_FOUND, "No blogs matching input characters");
+        return CommonReturnType.builder().status("success").data(pagedBlogs).build();
+    }
 }

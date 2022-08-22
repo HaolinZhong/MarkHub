@@ -66,4 +66,10 @@ public interface BlogDoMapper {
     List<BlogDo> selectByPager(@Param("prev") Integer prev, @Param("pageSize") Integer pageSize);
 
     Integer count();
+
+    List<BlogDo> findByPager(@Param("prev") Integer prev,
+                             @Param("pageSize") Integer pageSize,
+                             @Param("title") String title);
+
+    Integer resultCount(@Param("title") String title);
 }

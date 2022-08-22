@@ -7,7 +7,7 @@
           @keyup.enter.native="search"
           v-model="searchTitle"
           class="m-search"
-          placeholder="press ENTER to search for blogs"
+          placeholder="press ENTER to search for blogs according to title"
           prefix-icon="el-icon-search"
         />
       </el-header>

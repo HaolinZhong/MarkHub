@@ -60,4 +60,18 @@ public class BlogServiceImpl implements BlogService {
         if (res != 1) throw new ServiceException(ServiceExceptionEnum.UNKNOWN_ERROR);
         return true;
     }
+
+    @Override
+    public Pager<BlogDo> findBlogByPager(Integer page, Integer pageSize, String title) {
+        List<BlogDo> blogDos = blogDoMapper.findByPager((page - 1) * pageSize, pageSize, title);
+        Integer total = blogDoMapper.resultCount(title);
+
+        Pager<BlogDo> pager = new Pager<>();
+        pager.setCurrentPage(page);
+        pager.setPageSize(pageSize);
+        pager.setRows(blogDos);
+        pager.setTotal(total);
+
+        return pager;
+    }
 }
