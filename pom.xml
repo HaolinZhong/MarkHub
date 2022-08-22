@@ -17,6 +17,11 @@
         <java.version>11</java.version>
         <mapstruct.version>1.5.1.Final</mapstruct.version>
     </properties>
+
+    <modules>
+        <module>markhub-frontend</module>
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
