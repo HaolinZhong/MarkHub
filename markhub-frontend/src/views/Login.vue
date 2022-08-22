@@ -49,7 +49,6 @@ export default {
         if (valid) {
           alert('submit!');
           this.$axios.post("http://localhost:8081/login", this.ruleForm).then(res => {
-            console.log(res)
             const jwt = res.headers['authorization'];
             const userInfo = res.data.data
             // set jwt & userInfo in store
@@ -58,7 +57,6 @@ export default {
             this.$router.push("/blogs");
           })
         } else {
-          console.log('login failed');
           return false;
         }
       });

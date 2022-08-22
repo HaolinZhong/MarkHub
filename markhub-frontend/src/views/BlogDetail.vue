@@ -3,16 +3,26 @@
     <Header/>
     <div class="blog">
 
-      <h2>
-        {{ blog.title }}
-      </h2>
-      <div id="editBtnDiv">
-        <el-button
-          type="primary"
-          @click="editBlog"
-          v-if="isCreator"
-        >Edit
-        </el-button>
+      <div style="display: flex">
+        <h2>
+          {{ blog.title }}
+        </h2>
+        <div id="editBtnDiv" style="margin-left: auto; justify-content: flex-end">
+          <el-button
+            type="primary"
+            @click="editBlog"
+            v-if="isCreator"
+          >Edit
+          </el-button>
+        </div>
+      </div>
+
+
+
+      <div class="creatorInfo">
+          <el-avatar :size="40" :src="creator.avatar"></el-avatar>
+          <h3 v-text="creator.name" id="author"/>
+          <p v-text="`published on ${blog.createdAt}`" id="date"></p>
       </div>
 
       <el-divider/>
@@ -37,7 +47,12 @@ export default {
         id: '',
         title: '',
         content: '',
-        description: ''
+        description: '',
+        createdAt: ''
+      },
+      creator: {
+        avatar: '',
+        name: ''
       },
       isCreator: false
     }
@@ -55,8 +70,16 @@ export default {
         this.blog.id = blog.id
         this.blog.title = blog.title
         this.blog.description = blog.description
+        this.blog.createdAt = blog.createdAt
         this.blog.content = md.render(blog.content)
-        this.isCreator = (blog.userId === this.$store.getters.getUser.id)
+        this.isCreator = this.$store.getters.getUser && (blog.userId === this.$store.getters.getUser.id)
+
+        this.$axios.get(`/user/get?id=${blog.userId}`).then(res => {
+          const creator = res.data.data
+          this.creator.avatar=creator.avatar
+          this.creator.name=creator.name
+        })
+
       })
     }
   }
@@ -75,10 +98,6 @@ export default {
   padding: 50px;
 }
 
-#editBtnDiv {
-  display: inline;
-  float: right;
-}
 
 .markdown-body {
   margin-top: 50px;
@@ -86,7 +105,25 @@ export default {
 
 h2 {
   font-family: 'Lato', sans-serif;
-  display: inline;
+}
+
+.creatorInfo {
+  font-family: 'Lato', sans-serif;
+  padding-top: 30px;
+  vertical-align: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+#author {
+  margin-left: 10px;
+  justify-content: start;
+}
+
+#date {
+  justify-content: flex-end;
+  margin-left: auto;
 }
 
 

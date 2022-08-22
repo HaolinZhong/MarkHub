@@ -23,7 +23,6 @@ public class UserController {
     private final UserConverter userConverter;
 
     @GetMapping("/get")
-    @RequiresAuthentication
     @ResponseBody
     public CommonReturnType getUserById(@RequestParam("id") Long userId) {
         UserDo userDo = userService.getUserById(userId);

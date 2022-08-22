@@ -57,12 +57,12 @@ export default {
   },
   // get user info when created
   created () {
-    if (this.$store.getters.getUser.name) {
+    if (this.$store.getters.getUser && this.$store.getters.getUser.name) {
       this.user.name = this.$store.getters.getUser.name
       this.user.avatar = this.$store.getters.getUser.avatar
       this.hasLogin = true;
     } else {
-      console.log(this.$store.state);
+      this.$store.commit("REMOVE_INFO")
     }
   }
 }

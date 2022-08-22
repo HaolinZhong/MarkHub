@@ -93,13 +93,7 @@ export default {
               });
             })
           }
-
-
-
-
-
         } else {
-          console.log('Failed to create the blog');
           return false;
         }
       });
