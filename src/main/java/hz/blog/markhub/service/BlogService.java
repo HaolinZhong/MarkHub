@@ -2,6 +2,7 @@ package hz.blog.markhub.service;
 
 import hz.blog.markhub.domain.BlogDo;
 import hz.blog.markhub.domain.Pager;
+import hz.blog.markhub.exception.ServiceException;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface BlogService {
     BlogDo createBlog(BlogDo blogDo);
 
     Boolean updateBlog(BlogDo blogDo);
+
+    Boolean deleteBlog(Long blogId) throws ServiceException;
 }

@@ -82,4 +82,11 @@ public class BlogController {
         return CommonReturnType.builder().status("success").build();
     }
 
+    @RequiresAuthentication
+    @PostMapping("/delete/{blogId}")
+    @ResponseBody
+    public CommonReturnType delete(@PathVariable(name = "blogId") Long blogId) throws ServiceException {
+        blogService.deleteBlog(blogId);
+        return CommonReturnType.builder().status("success").data("Successfully Deleted!").build();
+    }
 }

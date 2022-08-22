@@ -3,26 +3,31 @@
     <Header/>
     <div class="blog">
 
-      <div style="display: flex">
+      <div style="display: flex; vertical-align: center">
         <h2>
           {{ blog.title }}
         </h2>
-        <div id="editBtnDiv" style="margin-left: auto; justify-content: flex-end">
+        <div id="editBtnDiv" style="margin-left: auto; justify-content: flex-end; margin-top: 20px">
           <el-button
             type="primary"
             @click="editBlog"
             v-if="isCreator"
           >Edit
           </el-button>
+          <el-button
+            type="danger"
+            @click="deleteBlog"
+            v-if="isCreator"
+          >Delete
+          </el-button>
         </div>
       </div>
 
 
-
       <div class="creatorInfo">
-          <el-avatar :size="40" :src="creator.avatar"></el-avatar>
-          <h3 v-text="creator.name" id="author"/>
-          <p v-text="`published on ${blog.createdAt}`" id="date"></p>
+        <el-avatar :size="40" :src="creator.avatar"></el-avatar>
+        <h3 v-text="creator.name" id="author"/>
+        <p v-text="`published on ${blog.createdAt}`" id="date"></p>
       </div>
 
       <el-divider/>
@@ -60,6 +65,35 @@ export default {
   methods: {
     editBlog() {
       this.$router.push(`${this.blog.id}/edit`)
+    },
+    deleteBlog() {
+      const blogId = this.$route.params.blogId
+      if (blogId) {
+        this.$confirm('The blog will be deleted permanently. Are you sure?', 'Warning', {
+          confirmButtonText: 'Confirm',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          this.$axios.post(`/blog/delete/${blogId}`, null, {
+            headers: {
+              "Authorization": localStorage.getItem("token")
+            }
+          }).then(res => {
+            this.$message({
+              type: 'success',
+              message: res.data.data
+            });
+            this.$router.push("/blogs")
+          })
+
+        }).catch(() => {
+
+          this.$message({
+            type: 'info',
+            message: 'Operation Cancelled'
+          });
+        });
+      }
     }
   },
   created() {
@@ -76,8 +110,8 @@ export default {
 
         this.$axios.get(`/user/get?id=${blog.userId}`).then(res => {
           const creator = res.data.data
-          this.creator.avatar=creator.avatar
-          this.creator.name=creator.name
+          this.creator.avatar = creator.avatar
+          this.creator.name = creator.name
         })
 
       })

@@ -2,10 +2,13 @@ package hz.blog.markhub.service.impl;
 
 import hz.blog.markhub.domain.BlogDo;
 import hz.blog.markhub.domain.Pager;
+import hz.blog.markhub.exception.ServiceException;
+import hz.blog.markhub.exception.ServiceExceptionEnum;
 import hz.blog.markhub.mapper.BlogDoMapper;
 import hz.blog.markhub.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,5 +51,13 @@ public class BlogServiceImpl implements BlogService {
     public Boolean updateBlog(BlogDo blogDo) {
         Integer rowAffected = blogDoMapper.updateByPrimaryKeySelective(blogDo);
         return rowAffected == 1;
+    }
+
+    @Transactional
+    @Override
+    public Boolean deleteBlog(Long blogId) throws ServiceException {
+        int res = blogDoMapper.deleteByPrimaryKey(blogId);
+        if (res != 1) throw new ServiceException(ServiceExceptionEnum.UNKNOWN_ERROR);
+        return true;
     }
 }
