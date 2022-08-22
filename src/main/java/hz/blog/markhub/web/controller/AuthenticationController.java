@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,10 @@ public class AuthenticationController {
     private final UserService userService;
     private final UserConverter userConverter;
     private final JwtUtils jwtUtils;
+    @Value("${encrypt.salt}")
+    private String salt;
+    @Value("${encrypt.times}")
+    private int times;
 
     @PostMapping("/login")
     public CommonReturnType login(@Validated @RequestBody LoginDto loginDto, HttpServletResponse response) throws ServiceException {
@@ -34,8 +40,8 @@ public class AuthenticationController {
         if (userDo == null)
             throw new ServiceException(ServiceExceptionEnum.AUTHENTICATION_FAILED, "Incorrect username or password");
 
-        // password encryption will be completed in frontend;
-        if (!StringUtils.equals(userDo.getPassword(), loginDto.getPassword())) {
+        String encryptedPw = new SimpleHash("md5", loginDto.getPassword(), salt, times).toString();
+        if (!StringUtils.equals(userDo.getPassword(), encryptedPw)) {
             throw new ServiceException(ServiceExceptionEnum.AUTHENTICATION_FAILED, "Incorrect username or password");
         }
 

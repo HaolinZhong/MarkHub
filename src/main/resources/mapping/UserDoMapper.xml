@@ -41,6 +41,7 @@
     <include refid="Base_Column_List" />
     from m_user
     where name = #{name, jdbcType=VARCHAR}
+    limit 1
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

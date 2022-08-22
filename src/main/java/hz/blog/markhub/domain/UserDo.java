@@ -1,5 +1,9 @@
 package hz.blog.markhub.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;

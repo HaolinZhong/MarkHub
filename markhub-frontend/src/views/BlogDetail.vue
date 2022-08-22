@@ -4,9 +4,9 @@
     <div class="blog">
 
       <div style="display: flex; vertical-align: center">
-        <h2>
+        <h1>
           {{ blog.title }}
-        </h2>
+        </h1>
         <div id="editBtnDiv" style="margin-left: auto; justify-content: flex-end; margin-top: 20px">
           <el-button
             type="primary"
@@ -141,7 +141,7 @@ export default {
   margin-top: 50px;
 }
 
-h2 {
+h1 {
   font-family: 'Lato', sans-serif;
 }
 

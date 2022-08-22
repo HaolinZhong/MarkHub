@@ -7,23 +7,26 @@
       <el-main>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="Username" prop="username" style="margin-right: 15%">
-            <el-input v-model="ruleForm.username"></el-input>
+            <el-input v-model="ruleForm.username" placeholder="enter your user name"></el-input>
+          </el-form-item>
+          <el-form-item label="Avatar Link" prop="avatar" style="margin-right: 15%">
+            <el-input v-model="ruleForm.avatar" placeholder="(optional) enter the link to your avatar image"></el-input>
           </el-form-item>
           <el-form-item label="Password" prop="password" style="margin-right: 15%">
-            <el-input v-model="ruleForm.password" show-password></el-input>
+            <el-input v-model="ruleForm.password" show-password placeholder="enter your password"></el-input>
+          </el-form-item>
+          <el-form-item label="Confirm" prop="confPassword" style="margin-right: 15%">
+            <el-input v-model="ruleForm.confPassword" show-password placeholder="confirm your password"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">Login</el-button>
-            <el-button @click="register">
-              <router-link :to="{name: 'Register'}" style="text-decoration: none">
-                Register
-              </router-link>
+            <el-button type="primary" @click="submitForm('ruleForm')">
+              Register
             </el-button>
             <el-button
-              style="margin-right: 20%"
+              style="margin-right: 25%"
             >
-              <router-link :to="{name: 'Blogs'}" style="text-decoration: none">
-                Guests View
+              <router-link :to="{name: 'Login'}" style="text-decoration: none">
+                Back to Login
               </router-link>
             </el-button>
           </el-form-item>
@@ -35,12 +38,14 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "Register",
   data () {
     return {
       ruleForm: {
         username: '',
-        password: ''
+        password: '',
+        confPassword: '',
+        avatar: '',
       },
       rules: {
         username: [
@@ -50,6 +55,9 @@ export default {
         ],
         password: [
           { required: true, message: 'Please enter your password', trigger: 'blur' }
+        ],
+        confPassword: [
+          { required: true, message: 'Please confirm your password', trigger: 'blur'}
         ]
       }
     };
@@ -58,13 +66,12 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$axios.post("/login", this.ruleForm).then(res => {
-            const jwt = res.headers['authorization'];
-            const userInfo = res.data.data
-            // set jwt & userInfo in store
-            this.$store.commit("SET_TOKEN", jwt);
-            this.$store.commit("SET_USERINFO", userInfo);
-            this.$router.push("/blogs");
+          this.$axios.post("/user/create", this.ruleForm).then(res => {
+            this.$message({
+              type: 'success',
+              message: "Successfully Registered!"
+            });
+            this.$router.push("/login");
           })
         } else {
           return false;
