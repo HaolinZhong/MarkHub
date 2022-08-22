@@ -12,14 +12,18 @@
             type="primary"
             @click="editBlog"
             v-if="isCreator"
-          >Edit
-          </el-button>
+            plain
+            icon="el-icon-edit"
+            circle
+          />
           <el-button
             type="danger"
             @click="deleteBlog"
             v-if="isCreator"
-          >Delete
-          </el-button>
+            plain
+            icon="el-icon-delete"
+            circle
+          />
         </div>
       </div>
 
