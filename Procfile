@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -jar markhub-backend/target/markhub-backend-0.0.1-SNAPSHOT.jar
