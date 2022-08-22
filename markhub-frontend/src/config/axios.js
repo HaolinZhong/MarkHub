@@ -3,14 +3,8 @@ import Element from 'element-ui'
 import store from '../store';
 import router from '../router'
 
-let s = window.location.toString();
-let s1 = s.substr(7,s.length);
-let s2 = s1.indexOf("/");
-s = s.substr(0,8+s2);
-const a = "http://localhost:8081/";
-
 // default baseUrl
-axios.defaults.baseURL= a
+axios.defaults.baseURL= "http://localhost:8081/";
 
 // request interceptor
 axios.interceptors.request.use(config => {
